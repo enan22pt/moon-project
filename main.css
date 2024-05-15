@@ -1,0 +1,55 @@
+body, html {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    height: 100%;
+    background: #000; /* Black background to represent night */
+}
+
+#stars-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    perspective: 1000px;
+}
+
+.star {
+    position: absolute;
+    background-color: white;
+    border-radius: 50%;
+    opacity: 0;
+    animation: flicker 5s infinite ease-in-out;
+}
+
+.small {
+    width: 1px;
+    height: 1px;
+    box-shadow: 0 0 5px rgb(255, 255, 255),
+    0 0 45px rgb(255, 255, 255),
+    0 0 90px rgb(255, 255, 255);
+}
+
+.medium {
+    width: 3px;
+    height: 3px;
+    box-shadow: 0 0 5px rgb(255, 255, 255),
+    0 0 45px rgb(255, 255, 255),
+    0 0 90px rgb(255, 255, 255);
+}
+
+.large {
+    width: 5px;
+    height: 5px;
+    box-shadow: 0 0 5px rgb(255, 255, 255),
+    0 0 45px rgb(255, 255, 255),
+    0 0 90px rgb(255, 255, 255);
+}
+
+@keyframes flicker {
+    0%, 100% {
+        opacity: 0;
+    }
+    50% {
+        opacity: 1;
+    }
+}

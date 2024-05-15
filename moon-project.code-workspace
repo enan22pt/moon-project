@@ -1,0 +1,10 @@
+{
+  "folders": [
+	{
+		"path": "../../../Desktop/moon-project"
+	}
+],
+  "settings": {
+    "liveServer.settings.multiRootWorkspaceName": "moon-project"
+  }
+}
