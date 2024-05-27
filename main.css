@@ -10,6 +10,37 @@ body, html {
   transition: background 1s ease;
 }
 
+#moon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 300px; /* Adjust size as needed */
+  height: 300px; /* Adjust size as needed */
+  background: url('moon.png') no-repeat center center; /* Add your moon image here */
+  background-size: cover;
+  transform: translate(-50%, -50%);
+}
+
+#toptext, #bottomtext{
+  position: absolute;
+  top: calc(50% - 250px);
+  left: 50%;
+  transform: translateX(-50%);
+  font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  text-align: center;
+  color: white;
+  font-size: 200%;
+  filter: drop-shadow(0 0 15px rgba(255, 255, 255, 0.5));
+  }
+
+#toptext {
+  top: 35%;
+}
+
+#bottomtext {
+  top: 65%;
+}
+
 .switch {
   position: relative;
   width: 130px;
