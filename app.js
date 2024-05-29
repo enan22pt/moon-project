@@ -6,11 +6,14 @@ document.addEventListener("DOMContentLoaded", function() {
     const moon = document.getElementById('moon');
     const topText = document.getElementById('toptext');
     const bottomText = document.getElementById('bottomtext');
+    const spotifyContainer = document.getElementById('spotify-container');
     const body = document.body;
     const container = document.getElementById('stars-container');
     const numberOfStars = 600;
 
-    
+    let currentTimeouts = [];
+    let lastDisplayedIndex = -1;
+
     // Update based on toggle state at initialization
     updateSky();
 
@@ -18,28 +21,58 @@ document.addEventListener("DOMContentLoaded", function() {
     toggle.addEventListener('change', updateSky);
 
     const textData = [
-        { time: 5, top: "And then one day", bottom: "Someone walks into your life" },
-        { time: 10, top: "A total stranger", bottom: "And they become so important to you" },
-        { time: 15, top: "And while you've known them", bottom: "For such a short time" },
-        { time: 20, top: "You feel that you have loved them", bottom: "For a lifetime" },
-        { time: 25, top: "", bottom: "" }
+        { time: 5, top: "And then one day" },
+        { time: 10, bottom: "Someone walks into your life" },
+        { time: 15, top: "A total stranger" },
+        { time: 20, bottom: "And they become so important to you" },
+        { time: 25, top: "And while you've known them" },
+        { time: 30, bottom: "For such a short time" },
+        { time: 35, top: "You feel that you have loved them" },
+        { time: 40, bottom: "For a lifetime" },
+        { time: 45, top: "", bottom: "" }
     ];
 
     function displayText(currentTime) {
+        clearTimeouts();
         for (let i = 0; i < textData.length; i++) {
             if (textData[i].time <= currentTime && currentTime < (textData[i + 1] ? textData[i + 1].time : Infinity)) {
-                topText.textContent = textData[i].top;
-                bottomText.textContent = textData[i].bottom;
+                if (lastDisplayedIndex !== i) {
+                    lastDisplayedIndex = i;
+                    if (textData[i].top) {
+                        typeWriterEffect(topText, textData[i].top);
+                    } else {
+                        topText.textContent = '';
+                    }
+                    if (textData[i].bottom) {
+                        typeWriterEffect(bottomText, textData[i].bottom);
+                    } else {
+                        bottomText.textContent = '';
+                    }
+                }
                 break;
             }
         }
+    }
+
+    function typeWriterEffect(element, text) {
+        element.textContent = '';
+        for (let i = 0; i < text.length; i++) {
+            currentTimeouts.push(setTimeout(() => {
+                element.textContent += text[i];
+            }, i * 44));
+        }
+    }
+
+    function clearTimeouts() {
+        currentTimeouts.forEach(timeout => clearTimeout(timeout));
+        currentTimeouts = [];
     }
 
     let currentTime = 0;
     setInterval(() => {
         currentTime++;
         displayText(currentTime);
-    }, 1000); // Update every second
+    }, 1500); // Update every second
 
     function updateSky() {
         if (toggle.checked) { // If checked, show day
@@ -48,6 +81,11 @@ document.addEventListener("DOMContentLoaded", function() {
             body.classList.add('day');
             moon.style.display = 'none';
             ccloud.style.display = 'none';
+            setTimeout(() =>{
+            topText.style.display = 'block';
+            bottomText.style.display = 'block';    
+            },1000);
+            
         } else { // If unchecked, show night
             body.classList.remove('day');
             body.classList.add('sunset');
@@ -60,8 +98,9 @@ document.addEventListener("DOMContentLoaded", function() {
                 setTimeout(() => {
                     ccloud.style.display = 'block';
                     moon.style.display = 'block';
-                }, 500); // Delay to ensure smooth transition
-            }, 5000); // 5 seconds for the sunset transition
+                    spotifyContainer.style.display = 'block';
+                }, 2000);
+            }, 5000); 
         }
     }
 
@@ -96,5 +135,4 @@ document.addEventListener("DOMContentLoaded", function() {
         const stars = document.querySelectorAll('.star');
         stars.forEach(star => star.remove());
     }
-        
 });
