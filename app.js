@@ -100,7 +100,7 @@ document.addEventListener("DOMContentLoaded", function() {
                     moon.style.display = 'block';
                     spotifyContainer.style.display = 'block';
                 }, 2000);
-            }, 5000); 
+            }, 2500); 
         }
     }
 

@@ -1,13 +1,15 @@
-body, html {
+html, body {
   margin: 0;
   height: 100%;
   width: 100%;
+  overflow: hidden; /* Apply to both html and body */
+}
+
+body {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  overflow-x: hidden;
-  overflow-y: hidden;
   transition: background 1s ease;
 }
 
